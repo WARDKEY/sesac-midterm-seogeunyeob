@@ -5,16 +5,24 @@ class TodoService {
     return await todoRepository.createPost({ title, description, userId });
   }
 
-  async findAllPosts() {
-    return await todoRepository.findAllPosts();
+  async findAllPosts(user) {
+    const todos = await todoRepository.findAllPosts(user);
+    console.log(todos);
+
+    // 생성일과 삭제일이 다른 것은 삭제된 것이므로 제외
+    return todos.filter((todo) => {
+      return todo.deletedAt.getTime() === todo.createdAt.getTime();
+    });
   }
 
   async findPostById(todoId) {
     return await todoRepository.findPostById(todoId);
   }
 
-  async updatePost({ todoId, title, content }) {
+  async updatePost({ todoId, isCompleted }) {
     const post = await todoRepository.findPostById(todoId);
+
+    console.log(post);
 
     if (!post) {
       throw new Error("PostNotFound");
@@ -22,8 +30,7 @@ class TodoService {
 
     const updatePost = await todoRepository.updatePost({
       todoId,
-      title,
-      content,
+      isCompleted,
     });
     return updatePost;
   }
@@ -33,6 +40,8 @@ class TodoService {
     if (!post) {
       throw new Error("PostNotFound");
     }
+
+    console.log(post);
 
     await todoRepository.deletePost(todoId);
   }

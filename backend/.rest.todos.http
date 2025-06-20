@@ -1,4 +1,4 @@
-@accessToken =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1MDM5Nzg1NSwiZXhwIjoxNzUwNDQxMDU1fQ.OHpohOj1qZxUU5lNnndyF3-SxNHq-AiS9xCSfvGjjes
+@accessToken =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1MDQwNjg4NiwiZXhwIjoxNzUwNDUwMDg2fQ.YvgfltkfRF0MR809UH1UpRKJK4Fkj9sETYYsnSFtDRA
 
 ### TODO 생성
 POST http://localhost:3000/todos
@@ -25,8 +25,8 @@ Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
 {
-  "todoId": 1,
-  "isDone": true
+  "todoId": 2,
+  "isCompleted": true
 }
 
 ### TODO 삭제

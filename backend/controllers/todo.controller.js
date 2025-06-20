@@ -21,7 +21,8 @@ class TodoController {
   // 전체 게시글 조회
   async findAllPosts(req, res, next) {
     try {
-      const posts = await todoService.findAllPosts();
+      const user = req.user;
+      const posts = await todoService.findAllPosts(user);
       return res.status(200).json({ data: posts });
     } catch (e) {
       next(new Error("DataBaseError"));
@@ -50,13 +51,11 @@ class TodoController {
 
   // 게시글 수정
   async updatePost(req, res, next) {
-    const { todoId } = req.params;
-    const { title, content } = req.body;
+    const { todoId, isCompleted } = req.body;
     try {
       const updatePost = await todoService.updatePost({
         todoId,
-        title,
-        content,
+        isCompleted,
       });
 
       return res.status(200).json({
@@ -64,13 +63,15 @@ class TodoController {
         data: updatePost,
       });
     } catch (e) {
+      console.log(e);
+
       next(e);
     }
   }
 
   // 게시글 삭제
   async deletePost(req, res, next) {
-    const { todoId } = req.params;
+    const { todoId } = req.body;
     try {
       await todoService.deletePost(+todoId);
       return res.status(200).json({

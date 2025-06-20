@@ -11,8 +11,11 @@ class TodoRepository {
     });
   }
 
-  async findAllPosts() {
+  async findAllPosts(user) {
     const posts = await prisma.Todo.findMany({
+      where: {
+        userId: +user,
+      },
       // join
       include: {
         User: {
@@ -39,27 +42,29 @@ class TodoRepository {
         User: {
           select: {
             userId: true,
-            nickname: true,
+            username: true,
           },
         },
       },
     });
   }
 
-  async updatePost({ todoId, title, content }) {
+  async updatePost({ todoId, isCompleted }) {
     return await prisma.Todo.update({
       where: { todoId: +todoId },
       data: {
-        title,
-        content,
+        isCompleted,
         updatedAt: new Date(),
       },
     });
   }
 
   async deletePost(todoId) {
-    await prisma.Todo.delete({
+    await prisma.Todo.update({
       where: { todoId: +todoId },
+      data: {
+        deletedAt: new Date(),
+      },
     });
   }
 }

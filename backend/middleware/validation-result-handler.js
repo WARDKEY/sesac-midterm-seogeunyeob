@@ -40,7 +40,7 @@ exports.postsValidator = [
 
 // 게시글 조회, 삭제 유효성 체크
 exports.getPostsValidator = [
-  param("todiId")
+  body("todoId")
     .isInt()
     .withMessage("id가 숫자여야 합니다.")
     .notEmpty()
@@ -49,14 +49,9 @@ exports.getPostsValidator = [
 
 // 게시글 수정 유효성 체크
 exports.putPostsValidator = [
-  param("todoId")
-    .isInt()
-    .withMessage("id가 숫자여야 합니다.")
-    .notEmpty()
-    .withMessage("todoId가 필요합니다."),
-  body("title").notEmpty().withMessage("제목을 입력해주세요."),
+  body("todoId").notEmpty().withMessage("todoId가 필요합니다."),
 
-  body("description").notEmpty().withMessage("내용을 입력해주세요."),
+  body("isCompleted").notEmpty().withMessage("isCompleted를 입력해주세요."),
 ];
 
 exports.handleValidationResult = (req, res, next) => {

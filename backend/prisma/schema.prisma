@@ -7,37 +7,32 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// User 모델 정의
 model Users {
   userId    Int      @id @default(autoincrement()) @map("user_Id")
   email     String   @unique @map("email")
   password  String   @map("password")
   username  String   @map("username")
-  phone     String   @default("010-0000-0000") @map("phone")
+  phone     String?  @map("phone")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  // User와 Post의 1:N 관계 정의: 한 명의 사용자가 여러 개의 게시글을 작성할 수 있습니다.
-  Todo Todo[] // Post 모델과의 관계 필드. 이 User에 연결된 모든 Post 레코드를 배열로 가집니다.
+  Todo Todo[]
 
-  @@map("Users") // 데이터베이스 테이블 이름을 'Users'로 매핑
+  @@map("Users")
 }
 
-// Post 모델 정의
 model Todo {
   todoId      Int      @id @default(autoincrement()) @map("todo_Id")
-  userId      Int      @map("user_Id") // 외래 키 (FK): User 모델의 userId를 참조
+  userId      Int      @map("user_Id")
   title       String   @map("title")
   description String   @map("description") @db.Text
   isCompleted Boolean  @default(false) @map("is_completed")
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
+  // 생성일과 삭제일을 동일하게 설정, 이후 삭제되면 삭제일 업데이트 후 둘이 다르면 조회에서 제외
   deletedAt   DateTime @default(now()) @map("deleted_at")
 
-  // Post와 User의 관계 정의: 하나의 게시글은 한 명의 사용자에 의해 작성됩니다.
-  // fields: [userId]는 현재 Post 모델의 userId 필드가 외래 키임을 나타냅니다.
-  // references: [userId]는 Users 모델의 userId 필드를 참조함을 나타냅니다.
   User Users @relation(fields: [userId], references: [userId])
 
-  @@map("Todos") // 데이터베이스 테이블 이름을 'Posts'로 매핑
+  @@map("Todos")
 }

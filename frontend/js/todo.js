@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const li = document.createElement("div");
       li.className = "card";
       li.innerHTML = `
-    <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${todo.title}</h5>
       <p class="card-text">${todo.description}</p>
@@ -36,7 +35,6 @@ function createPosts() {
     const li = document.createElement("div");
     li.className = "card";
     li.innerHTML = `
-    <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${todo.title}</h5>
       <p class="card-text">${todo.description}</p>

@@ -14,8 +14,7 @@ const router = express.Router();
 
 router
   .route("/todos")
-  // 전체 게시글 조회(누구나/ 작성자 정보도 같이 보냄)
-  .get(todoController.findAllPosts)
+  .get(authenticateToken, todoController.findAllPosts)
 
   // 게시글 작성(로그인된 사람만)
   .post(
@@ -23,23 +22,14 @@ router
     postsValidator,
     handleValidationResult,
     todoController.createPost
-  );
-
-router
-  .route("/todos/:todoId")
-  // 특정 게시글 조회(누구나)
-  .get(getPostsValidator, handleValidationResult, todoController.findPostById)
-
-  // 게시글 수정(작성자)
-  .put(
+  ) // 게시글 수정(작성자)
+  .patch(
     authenticateToken,
     putPostsValidator,
     handleValidationResult,
     checkPostOwner,
     todoController.updatePost
-  )
-
-  // 게시글 삭제(작성자)
+  ) // 게시글 삭제(작성자)
   .delete(
     authenticateToken,
     getPostsValidator,
@@ -47,5 +37,10 @@ router
     checkPostOwner,
     todoController.deletePost
   );
+
+router
+  .route("/todos/:todoId")
+  // 특정 게시글 조회(누구나)
+  .get(getPostsValidator, handleValidationResult, todoController.findPostById);
 
 module.exports = router;
