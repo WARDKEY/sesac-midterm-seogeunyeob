@@ -8,14 +8,31 @@ const content = document.getElementById("content");
 
 document.addEventListener("DOMContentLoaded", () => {
   const user = localStorage.getItem("currentUser");
+  function createPosts() {
+    postList.innerHTML = "";
+    todos.forEach((todo, index) => {
+      const li = document.createElement("div");
+      li.className = "card";
+      li.innerHTML = `
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${todo.title}</h5>
+      <p class="card-text">${todo.description}</p>
+    </div>
+  </div>
+    `;
+      postList.appendChild(li);
+    });
+  }
   if (!user) {
     window.location.href = "index.html";
   }
+  createPosts()
 });
 
 function createPosts() {
   postList.innerHTML = "";
-  posts.forEach((post, index) => {
+  todos.forEach((todo, index) => {
     const li = document.createElement("li");
     li.className =
       "list-group-item d-flex justify-content-between align-items-start";
@@ -23,8 +40,8 @@ function createPosts() {
      <div class="card">
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">${post.title}</h5>
-      <p class="card-text">${post.content}</p>
+      <h5 class="card-title">${todo.title}</h5>
+      <p class="card-text">${todo.description}</p>
     </div>
   </div>
 </div>
