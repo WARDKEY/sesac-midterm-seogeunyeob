@@ -37,59 +37,58 @@
     </nav>
     <div class="container mt-5">
       <h1 class="text-center mb-4">📋 게시판</h1>
-
-      <!-- 모달 -->
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                새 할 일 추가
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="mb-3">
-                  <label for="recipient-name" class="col-form-label"
-                    >제목</label
-                  >
-                  <input type="text" class="form-control" id="recipient-name" />
-                </div>
-                <div class="mb-3">
-                  <label for="message-text" class="col-form-label">설명</label>
-                  <textarea class="form-control" id="message-text"></textarea>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                닫기
-              </button>
-              <button type="button" class="btn btn-primary">추가</button>
-            </div>
+    </div>
+    <!-- 모달 -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              새 할 일 추가
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">제목</label>
+                <input type="text" class="form-control" id="title" />
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">설명</label>
+                <textarea class="form-control" id="content"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              닫기
+            </button>
+            <button type="button" id="postForm" class="btn btn-primary">
+              추가
+            </button>
           </div>
         </div>
       </div>
-
-      <!-- 게시글 목록 -->
-      <ul id="postList" class="list-group"></ul>
     </div>
+
+    <!-- 게시글 목록 -->
+    <div id="postList" class="row row-cols-1 row-cols-md-3 g-4"></div>
 
     <script type="module" src="js/todo.js"></script>
   </body>

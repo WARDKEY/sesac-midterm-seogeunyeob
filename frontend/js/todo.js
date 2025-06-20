@@ -1,8 +1,52 @@
 import { users, todos } from "./data.js";
 
+const postForm = document.getElementById("postForm");
+const postList = document.getElementById("postList");
+
+const title = document.getElementById("title");
+const content = document.getElementById("content");
+
 document.addEventListener("DOMContentLoaded", () => {
   const user = localStorage.getItem("currentUser");
   if (!user) {
     window.location.href = "index.html";
+  }
+});
+
+function createPosts() {
+  postList.innerHTML = "";
+  posts.forEach((post, index) => {
+    const li = document.createElement("li");
+    li.className =
+      "list-group-item d-flex justify-content-between align-items-start";
+    li.innerHTML = `
+     <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${post.title}</h5>
+      <p class="card-text">${post.content}</p>
+    </div>
+  </div>
+</div>
+    `;
+    postList.appendChild(li);
+  });
+}
+
+// 글 작성
+postForm.addEventListener("click", function (e) {
+  e.preventDefault();
+  const title = document.getElementById("title").value.trim();
+  const content = document.getElementById("content").value.trim();
+
+  // 제목과 내용 있으면 앞에 추가
+  if (title && content) {
+    posts.unshift({
+      title,
+      content,
+      date: new Date().toLocaleString(),
+    });
+    createPosts();
+    postForm.reset();
   }
 });
