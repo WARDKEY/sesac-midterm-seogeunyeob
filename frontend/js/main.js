@@ -14,5 +14,6 @@ document.getElementById("loginBtn").addEventListener("click", function () {
     localStorage.setItem("currentUser", { email: $email, password: $password });
   } else {
     alert("로그인 정보가 일치하지 않습니다.");
+    window.location.href = "todo.html";
   }
 });
