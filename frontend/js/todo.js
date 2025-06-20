@@ -55,7 +55,7 @@ postForm.addEventListener("click", function (e) {
 
   // 제목과 내용 있으면 앞에 추가
   if (title && content) {
-    posts.unshift({
+    todos.unshift({
       title,
       content,
       date: new Date().toLocaleString(),
