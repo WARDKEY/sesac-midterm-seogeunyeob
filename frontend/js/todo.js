@@ -27,22 +27,19 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!user) {
     window.location.href = "index.html";
   }
-  createPosts()
+  createPosts();
 });
 
 function createPosts() {
   postList.innerHTML = "";
   todos.forEach((todo, index) => {
-    const li = document.createElement("li");
-    li.className =
-      "list-group-item d-flex justify-content-between align-items-start";
+    const li = document.createElement("div");
+    li.className = "card";
     li.innerHTML = `
-     <div class="card">
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${todo.title}</h5>
       <p class="card-text">${todo.description}</p>
-    </div>
   </div>
 </div>
     `;
