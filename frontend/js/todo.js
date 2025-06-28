@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function createPosts() {
   postList.innerHTML = "";
-
+ 
   todos.forEach((todo, index) => {
     const li = document.createElement("div");
     li.className = "card";
